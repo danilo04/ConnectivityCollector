@@ -37,7 +37,7 @@ public class ConnectivityReceiver extends BroadcastReceiver {
         ContentValues values = new ContentValues();
         values.put(ConnectivityEntry.COLUMN_NAME_TIME, currentTimeStamp);
         if (info != null) {
-            // no  connectivity, both wifi and data are off
+	    // we have connectivity, determine which one
             values.put(ConnectivityEntry.COLUMN_NAME_DATA_STATUS,
                     getType(info, ConnectivityManager.TYPE_MOBILE));
             values.put(ConnectivityEntry.COLUMN_NAME_WIFI_STATUS,
@@ -53,7 +53,7 @@ public class ConnectivityReceiver extends BroadcastReceiver {
             values.put(ConnectivityEntry.COLUMN_NAME_STATE, info.getDetailedState().toString());
             values.put(ConnectivityEntry.COLUMN_NAME_SUBTYPE, info.getSubtypeName());
         } else {
-            // we have connectivity, determine which one
+            // no  connectivity, both wifi and data are off	    
             values.put(ConnectivityEntry.COLUMN_NAME_DATA_STATUS, 0);
             values.put(ConnectivityEntry.COLUMN_NAME_WIFI_STATUS, 0);
             values.put(ConnectivityEntry.COLUMN_NAME_ETHERNET_STATUS, 0);
